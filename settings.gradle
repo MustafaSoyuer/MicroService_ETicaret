@@ -1,4 +1,8 @@
 rootProject.name = 'MicroService_ETicaret'
 include 'AuthService'
 include 'UserService'
+include 'ConfigServer'
+include 'ConfigServerGit'
+include 'ElasticService'
+include 'ElasticSearchService'
 

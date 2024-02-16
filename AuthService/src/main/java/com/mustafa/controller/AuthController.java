@@ -6,6 +6,7 @@ import com.mustafa.entity.Auth;
 import com.mustafa.exception.AuthServiceException;
 import com.mustafa.exception.ErrorType;
 import com.mustafa.service.AuthService;
+import com.mustafa.utility.JwtTokenManager;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import static com.mustafa.constants.RestApiUrls.*;
 @RequestMapping(AUTH)
 public class AuthController {
     private final AuthService authService;
+    private final JwtTokenManager jwtTokenManager;
 
     @PostMapping(REGISTER)
     public ResponseEntity<Boolean> register(@RequestBody @Valid RegisterRequestDto dto){
@@ -30,11 +32,14 @@ public class AuthController {
     }
 
     @PostMapping(LOGIN)
-    public ResponseEntity<Auth> doLogin(@RequestBody @Valid LoginRequestDto dto){
+    public ResponseEntity<String> doLogin(@RequestBody @Valid LoginRequestDto dto){
         Optional<Auth> auth = authService.doLogin(dto);
         if(auth.isEmpty())
             throw new AuthServiceException(ErrorType.ERROR_INVALID_LOGIN_PARAMETER);
-        return ResponseEntity.ok(auth.get());
+        Optional<String> token = jwtTokenManager.createToken(auth.get().getId());
+        if (token.isEmpty())
+            throw new AuthServiceException(ErrorType.ERROR_CREATE_TOKEN);
+        return ResponseEntity.ok(token.get());
     }
 
 }

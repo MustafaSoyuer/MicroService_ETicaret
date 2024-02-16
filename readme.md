@@ -59,8 +59,87 @@
 ```
     db.createUser({ user: "bilgeUser", pwd: "bilgeUser*", roles: ["readWrite","dbAdmin"]})
 ```
-    
+
+## Docker üzerinde Redis Single Node oluşturmak
+
+```bash
+    docker run --name java13-redis -p 6379:6379 -d redis
+```
+
+```bash 
+docker run  --name redis-gui -d -p 8001:8001 redislabs/redisinsight:1.14.0
+```
+
+## Redis Spring Boot Configuration
+    İlgili bağımlılık eklenir.
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.2.2'
+
+    DİKKAT!!!
+    Redis repository olarak kulanılabileceği gibi, Cache olarakta kullanılabilir. Bu nedenle Spring te Cache i
+    ve Redis Repository aktif etmek için gerekli annotasyonları config e eklemeniz uygun olacaktır.
+
+```java
+@Configuration
+@EnableRedisRepositories
+@EnableCaching
+public class RedisConfig {
+
+    @Bean
+    public LettuceConnectionFactory redisConnectionFactory(){
+        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
+    }
+
+}
+```   
+
+    Rediste cache oluşturmak için, istediğiniz methodun üzerinde @Cachable anatasyonu ekliyorsunuz böylelikle bu method a girilen 
+    değerler için bir Key oluşturuluyor ve retırn değeri redis üzerinde cache lenmiş oluyor
+
+    DİKKAT!!! Spring Boot üzerinde alınan Cache lerin temizlenmesi
+    1- Objects.requireNanNull(cacheManager.getCache("user-find-all"")).clear();
+    bu işlem br key e sahip olmayan  cache leri temizlemek için kullanılır.
+    2-     1- Objects.requireNanNull(cacheManager.getCache("user-find-all"")).evict(KEY);
+    bu işlem dışarıdan değer alan bir methodun cache lenmiş datalarını özel olarak silmek için kullanılır.
+    @Cacheable("find-by-ad")
+    findByAd("muhammet")-> Redis => find-by-ad::muhammet
+
+
+## ElasticSearch Kurulumu ve Kullanımı
+
+```bash
+    docker network create java13-network
+```
+
+```bash
+    docker run -d --name elasticsearch --net java13-network -p 9200:9200 -p 9300:9300 -e "xpack.security.enabled=false" -e "xpack.security.transport.ssl.enabled=false" -e "discovery.type=single-node" -e "ELASTIC_USERNAME=admin"  -e "ELASTIC_PASSWORD=root" -e "ES_JAVA_OPTS=-Xms512m -Xmx1024m" elasticsearch:8.12.1
+```
+
+```bash
+    docker run -d --name kibana --net java13-network -p 5601:5601 kibana:8.12.1
+```
+    DİKKAT!!!
+    Elasticsearch sürümleri ile spirng sürümleri arasında bir uyum olması gerekli çünkü eski sürümleri kullanabilmek için
+    belli spring boot sürümlrerini kullanmanız gereklidir.
+
+    Spring Boot ile kullanmak için öncelikle bağımlılık ekliyoruz.
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-elasticsearch
+    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch:3.2.2'
+
+    İligi elasticsearch e bağlanmak için gerekli olana bağlantı configlerini application.yml içine yazoyoruz.
+
+```yml
+spring:
+  elasticsearch:
+    uris: http://localhost:9200
+    username: admin
+    password: root 
+```
 
 
 ## Servisler arası iletişim 
-    
+
+## Application.yml bilgisini config serverdan almak ve configure etmek
+    Application Properties (yml) için gerekli configler.
+    https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html
+ 

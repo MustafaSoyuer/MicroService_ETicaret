@@ -1,5 +1,6 @@
 package com.mustafa.exception;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -28,6 +29,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(createErrorMessage(authServiceException,authServiceException.getErrorType()),
                 authServiceException.getErrorType().getHttpStatus());
     }
+
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    @ResponseBody
+//    public ResponseEntity<ErrorMessage> duplicateHandler(ConstraintViolationException duplicateException){
+//        return new ResponseEntity<>(createErrorMessage(duplicateException,duplicateException.getErrorType()),
+//                duplicateException.getErrorType().getHttpStatus());
+//    }
 
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
