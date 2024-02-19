@@ -76,24 +76,16 @@ m
 =UserService/src/main/java/com/mustafa/config/RedisConfig.java,c\9\c9bc608047c9549da0cbefe4c2133fa37a1a0f82
 M
 ElasticSearchEgitim/readme.md,7\f\7f0cac85e8fd4301bb3fb4ab08cdb7eeb6904b9f
-b
-2ElasticService/src/main/java/org/example/Main.java,1\c\1c4d124baa46c6ea7a5cb5d8eb46f72bea11b54a
 K
 ElasticService/build.gradle,e\7\e7dbe06659cd17a8c42f6aa733d37488f04ae7aa
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
-b
-2ElasticService/src/main/java/com/mustafa/Main.java,a\6\a6166bb9d41e3e7af20226370eac2cfd31bc3280
-r
-BElasticService/src/main/java/com/mustafa/resources/application.yml,c\4\c483ab4cae1e8fe097bfb7527f89b5bec06264bb
 w
 GElasticService/src/main/java/com/mustafa/ElasticServiceApplication.java,6\2\6229f8cea7a527d04f7697b012a30c4017374c2f
 i
 9ElasticService/src/main/java/com/mustafa/domain/User.java,5\7\5761553473db0bc0308db2eb9b9e370fc879b2f0
 w
 GElasticService/src/main/java/com/mustafa/repository/UserRepository.java,6\b\6b1f35b6774ff0f20c3ee6838e50c587cc9515ec
-f
-6ElasticService/src/main/java/resources/application.yml,8\1\8143bf463e8ef6891a5024f3f489f97ec18c5e7b
 q
 AElasticService/src/main/java/com/mustafa/service/UserService.java,9\8\98977ba1da2c34d07a45c5f2ef0e7de0ca550d32
 w
@@ -132,3 +124,9 @@ E
 RedisConfig/readme.md,7\b\7b4810b49ffbde4a5860740f8b2fcf9bb32f6796
 F
 RedisConfig/Dockerfile,f\d\fdeed37e725527bf0ba668658e71ab490545bfb0
+p
+@AuthService/src/main/java/com/mustafa/config/RabbitMQConfig.java,8\1\81571ce305b5115d6d5d0a02a3e62b0db7c43040
+y
+IAuthService/src/main/java/com/mustafa/rabbitmq/model/CreateUserModel.java,7\2\721743517e5346bc758db9476321d47e3bc8f2ae
+
+OAuthService/src/main/java/com/mustafa/rabbitmq/producer/CreateUserProducer.java,0\0\0011d5dcdc5bf9a7b2254013fd4d136e40cfe2d8
