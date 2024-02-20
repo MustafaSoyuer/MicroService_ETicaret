@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -25,15 +26,52 @@ public class ElasticSecurityConfig {
          */
 
         /**
-         * Spring Boot 3.x öncesi config
+         * Spring Boot 3.x öncesi config.
          */
-        httpSecurity.authorizeRequests()
-                        .anyRequest()
-                                .authenticated();
-        httpSecurity.formLogin();
+//        httpSecurity.authorizeRequests()
+//                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() //bunun haricinde kalan tüm anyrequestler
+//                        .anyRequest()
+//                                .authenticated();
+//        httpSecurity.formLogin();
 
+        /**
+         * Spring Boot 3.x sonrası config.
+         * Spring Security gelen isteklerin ayruştırmak ve yönetmek için HttpSecurity içinde
+         * belli methodlarla işlemler yapar.
+         * 1- requestMatchers ->gelen isteklerden filtrelenecek olanları eklemek için kullanılır.
+         * 2- permitAll -> belirlenen isteklere erişimi aç.
+         * 3- anyRequest -> olabilecek tüm istekler tüm end-point kullanımları anlamına gelir.
+         * Dikkat burada konu olan kendinden önce belirlenen end-pointler dışında kalanları
+         * dahil etmemektedir.
+         * 4- authenticated -> belirlenen isteklere erişimde oturum açmayı zorunlu kıl.
+         */
+        httpSecurity.authorizeHttpRequests(req->
+                req.requestMatchers(
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "dev/v1/elastic/user/**"
+                ).permitAll()
+                        .anyRequest()
+                        .authenticated()
+
+        );
+
+        /**
+         * _csrf kullanımı genel olarak MVC ve Web projelerinde kullanılır.
+         *
+         * WAF ->Web Application Firewall
+         * genellikle, api gateway üzerinde aktif edilir ve saldrıları engellemek için kullanılır.
+         *
+         *
+         * CSRF restAPI kullanımlarından kapatılır. Çünkü istek atmak için bir sayfaya erişmemize
+         * gerek yoktur. Direkt olarak bir end-oint e erişim sağlıyoruz.
+         */
+//        httpSecurity.csrf().disable(); Spring Boot 3.x öncesi kullanımı
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         log.info("***** Tüm istekler buradan geçecek. *****");
+        httpSecurity.addFilterBefore(null,null);
+
 
         return httpSecurity.build();
     }

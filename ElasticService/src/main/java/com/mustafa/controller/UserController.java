@@ -16,12 +16,14 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(ADD)
+    @CrossOrigin("*")
     public ResponseEntity<Void> save(@RequestBody UserRequestDto dto){
         userService.save(dto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(UPDATE)
+    @CrossOrigin("*")
     public ResponseEntity<Void> update(@RequestBody UserRequestDto dto){
         userService.update(dto);
         return ResponseEntity.ok().build();
