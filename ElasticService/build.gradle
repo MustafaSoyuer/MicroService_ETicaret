@@ -6,5 +6,6 @@ buildscript {
 
 dependencies {
     implementation libs.springBootStarterDataElasticsearh
+    implementation libs.springBootStarterSecurity
 
 }

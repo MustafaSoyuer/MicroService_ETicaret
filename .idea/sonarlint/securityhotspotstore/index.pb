@@ -130,3 +130,9 @@ y
 IAuthService/src/main/java/com/mustafa/rabbitmq/model/CreateUserModel.java,7\2\721743517e5346bc758db9476321d47e3bc8f2ae
 
 OAuthService/src/main/java/com/mustafa/rabbitmq/producer/CreateUserProducer.java,0\0\0011d5dcdc5bf9a7b2254013fd4d136e40cfe2d8
+
+OUserService/src/main/java/com/mustafa/rabbitmq/consumer/CreateUserConsumer.java,c\2\c256158b6506023d4df9e232cc507482f8605a76
+y
+IUserService/src/main/java/com/mustafa/rabbitmq/model/CreateUserModel.java,e\9\e9b8df7426fa5bc3026baec8af300a54ebae6021
+ƒ
+SElasticService/src/main/java/com/mustafa/config/security/ElasticSecurityConfig.java,0\a\0a4193d6eccd6c64b7aa53ad824256d0a36c684a
