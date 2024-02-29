@@ -70,7 +70,7 @@ public class ElasticSecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         log.info("***** Tüm istekler buradan geçecek. *****");
-        httpSecurity.addFilterBefore(null,null);
+//        httpSecurity.addFilterBefore(null,null);
 
 
         return httpSecurity.build();

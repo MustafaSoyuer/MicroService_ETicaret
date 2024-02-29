@@ -101,9 +101,10 @@ public class RedisConfig {
     bu işlem br key e sahip olmayan  cache leri temizlemek için kullanılır.
     2-     1- Objects.requireNanNull(cacheManager.getCache("user-find-all"")).evict(KEY);
     bu işlem dışarıdan değer alan bir methodun cache lenmiş datalarını özel olarak silmek için kullanılır.
-    @Cacheable("find-by-ad")
-    findByAd("muhammet")-> Redis => find-by-ad::muhammet
-
+    @Cachable("find-by-ad")
+    findByAd("muhammet") -> Redis => find-by-ad::muhammet
+    clear cache -> getCache("find-by-ad").evict("muhammet");
+    Eğer bellir bir cache in tamamını temizlemek isterseniz, 1. maddeyi kullanın.
 
 ## ElasticSearch Kurulumu ve Kullanımı
 
@@ -155,9 +156,39 @@ spring:
     Bu envirenment ı eklemek için user microservisin main class üzerine sağ tıklayarak
     run modify configuration diyerek environment variable eklememiz gerekmektedir.
 
+    http://34.155.133.154:8888/application-auth.yml
+
 ## Servisler arası iletişim 
 
 ## Application.yml bilgisini config serverdan almak ve configure etmek
     Application Properties (yml) için gerekli configler.
     https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html
+
+## Docker Image Oluşturma
+
+    docker build -t <HUB_REPOSITORY_NAME/IMAGE NAME:VERSION> .
+    DİKKAT!!! MacOS M Chipset kullananlar özellikle platform belirtmelidirler.
+    (docker build --platform=linux/amd64 -t mustafasoyuer/config-service:v.0.1 .)
+    v.0.1 den sonra v.0.2 şeklinde tekrar pushlanmalı
+
+    1- docker build -t mustafasoyuer/auth-service:v.0.2 .
+
+    2- docker build -t mustafasoyuer/config-service:v.0.2 .
+
+    3- docker build -t mustafasoyuer/user-service:v.0.2 .
+
+## Kubernetes POD
+        Pod, Nodes içinde yer alan sanal PC lerdir. İçerisinde image ya da image lar barındırabilir. Bir yaşam döngüsü vardır.
+    Bu nedenle başlar, işlemlerini yürütür, bir süre sonra kaybolur. Be nedenle bir pod restart olsa bile aynı şekilde kalmaz 
+    yeni bir pod yeniden başlamaz yeniden doğar. Bu nedenle yer yeni başlamada yeni bir pod oluşur ve ip adresi değişir.
+    - Podlar yeniden doğduğu için içinde barındırdığı bilgiler silinir.
+    - Bağlantılar var ise kaybolur.
+
+        Bir pod DB olarak kullanılıyor ise içinde tuttuğu tüm bilgiler restart ettiğinde kaybolur. peki çözüm nedir?
+    Her PC nin bir harddiski vardır ve içinde bulunur, ancak kubernetes yapısında harddisk olarak adlandırdığımız 
+    bileşenlere karşılık gelen Volume kavramı bir pod un içinden kubernetes cluster içinde alınabilir. Böylece pod
+    ayağa kalkarken kendisine tahsis edilen Volume a bağlanarak verilerini oradan çekebilir.
+
+
+
  

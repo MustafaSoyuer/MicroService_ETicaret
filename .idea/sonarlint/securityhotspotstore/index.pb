@@ -136,3 +136,15 @@ y
 IUserService/src/main/java/com/mustafa/rabbitmq/model/CreateUserModel.java,e\9\e9b8df7426fa5bc3026baec8af300a54ebae6021
 ƒ
 SElasticService/src/main/java/com/mustafa/config/security/ElasticSecurityConfig.java,0\a\0a4193d6eccd6c64b7aa53ad824256d0a36c684a
+F
+AuthService/Dockerfile,3\6\36435672d4ba3b53ff24e8284e49ac8e48409261
+D
+Kubernetes/readme.md,7\4\74ba5f394a814c11f8d474a1c18a4b4875dee32d
+T
+$Kubernetes/deployment-postgresql.yml,e\2\e21cdfe19861005410b5394c72665a44bd80b573
+J
+ConfigServerGit/Dockerfile,8\1\81f02988392d13611477134e6a89998329a39d2b
+F
+UserService/Dockerfile,1\b\1b59455d1b07a0125fd9fbf2713699b971e10137
+p
+@UserService/src/main/java/com/mustafa/config/RabbitMQConfig.java,e\4\e43bd0872116751ad06538c44efc6e8ab3e8f663

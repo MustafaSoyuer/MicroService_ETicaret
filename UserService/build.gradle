@@ -9,5 +9,7 @@ dependencies {
     implementation libs.springBootStarterDataRedis
     implementation libs.springCloudOpenFeign
     implementation libs.springBootStarterAmqp
+    implementation libs.springCloudConfigClient
+
 
 }

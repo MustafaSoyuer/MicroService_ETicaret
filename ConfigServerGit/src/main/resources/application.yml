@@ -12,4 +12,4 @@ spring:
           default-label: "main"
           skip-ssl-validation: true
           username: "MustafaSoyuer"
-          password: "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"
+          password: ${GIT_KEY}

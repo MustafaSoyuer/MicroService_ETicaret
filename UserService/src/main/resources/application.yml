@@ -1,35 +1,8 @@
-server:
-  port: 9094
-
 spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: admin
-    password: root
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: UserProfile
-      username: bilgeUser
-      password: bilgeUser*
-
-logging:
-  level:
-    org.springframework: info
-    com.mustafa: info
-#    root: trace
-#  file:
-#    name: user-service.log
-#    max-size: 1MB
-
-userservice:
-  deger1: "1. Değer"
-  deger2: "2. Değer"
-  listem:
-    bir: "bu ilk değer"
-    iki: "bu ikinci"
-
-ahmetamcanasilsin:
-  iyiyim: "sen nasilsin"
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER} #http://service-config:8888
+  config:
+    import: "configserver:"
+  application:
+    name: application-user

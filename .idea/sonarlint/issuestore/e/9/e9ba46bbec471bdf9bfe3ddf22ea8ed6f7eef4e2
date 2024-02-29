@@ -1,5 +1,10 @@
 
 {
 java:S1488|"^Immediately return this expression instead of assigning it to the temporary variable "result".(åÎ ¯8§Û·…Ü1
+_
+java:S1854-"BRemove this useless assignment to local variable "userRequestDto".(‰ìíÏ8Î¬¯ß1
+P
+java:S1481-"3Remove this unused "userRequestDto" local variable.(‰ìíÏ8Ó¬¯ß1
+]	java:S1257"<This block of commented-out lines of code should be removed.(Ñ¸Ô¶úÿÿÿÿ8Ó¬¯ß1
 €
 java:S2142b"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ß•Äøÿÿÿÿ8»Û·…Ü1
